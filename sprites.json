@@ -1,0 +1,39 @@
+{
+    "sprites": [
+        {
+            "id": "right",
+            "asset": "right-turn.png",
+            "rotations": 4
+        },
+        {
+            "id": "left",
+            "asset": "left-turn.png",
+            "rotations": 4
+        },
+        {
+            "id": "straight",
+            "asset": "straight.png",
+            "rotations": 2
+        },
+        {
+            "id": "t",
+            "asset": "t-intersection.png",
+            "rotations": 4
+        },
+        {
+            "id": "cross",
+            "asset": "cross-intersection.png",
+            "rotations": 1
+        },
+        {
+            "id": "deadend",
+            "asset": "dead-end.png",
+            "rotations": 4
+        },
+        {
+            "id": "empty",
+            "asset": "empty.png",
+            "rotations": 1
+        }
+    ]
+}

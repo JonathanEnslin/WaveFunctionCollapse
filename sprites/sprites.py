@@ -81,9 +81,29 @@ def generate_left_turn(rotation=0, fillet_radii=DEFAULT_FILLET_RADIUS, tile_size
     image = image.transpose(Image.FLIP_LEFT_RIGHT)
     return image
 
+def generate_empty(tile_size=(DEFAULT_TILE_WIDTH, DEFAULT_TILE_HEIGHT), road_thickness=DEFAULT_ROAD_THICKNESS, road_colour=DEFAULT_ROAD_COLOUR, background_colour=DEFAULT_BACKGROUND_COLOUR):
+    image = Image.new('RGB', tile_size, background_colour)
+    return image
+
+def generat_dead_end(rotation=0, fillet_radii=DEFAULT_FILLET_RADIUS, tile_size=(DEFAULT_TILE_WIDTH, DEFAULT_TILE_HEIGHT), road_thickness=DEFAULT_ROAD_THICKNESS, road_colour=DEFAULT_ROAD_COLOUR, background_colour=DEFAULT_BACKGROUND_COLOUR):
+    image = Image.new('RGB', tile_size, background_colour)
+    draw = ImageDraw.Draw(image)
+    tile_width = tile_size[0]
+    tile_height = tile_size[1]
+    draw.rectangle([((tile_width - road_thickness) / 2, tile_height), ((tile_width + road_thickness) / 2, (tile_height) / 2)], fill=road_colour)
+
+    circ = shapes.get_circle_opposing_corners((tile_width / 2, tile_height / 2), road_thickness / 2)
+    draw.ellipse(circ, fill=road_colour)
+
+    return image.rotate(rotation, expand=True)
+
 if __name__ == '__main__':
+    print("Saving images...")
     generate_straight(rotation=0).save('straight.png')
-    generate_4_way_intersection().save('four_way_intersection.png')
+    generate_4_way_intersection().save('cross_intersection.png')
     generate_right_turn(rotation=0).save('right_turn.png')
     generate_left_turn(rotation=0).save('left_turn.png')
-    generate_3_way_intersection(rotation=0).save('3_way_intersection.png')
+    generate_3_way_intersection(rotation=0).save('t_intersection.png')
+    generate_empty().save('empty.png')
+    generat_dead_end().save('dead_end.png')
+    print("Done.")
