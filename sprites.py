@@ -4,10 +4,10 @@
 from PIL import Image, ImageDraw
 import shapes
 
-DEFAULT_TILE_HEIGHT = 1000
-DEFAULT_TILE_WIDTH = 1000
+DEFAULT_TILE_HEIGHT = 2000
+DEFAULT_TILE_WIDTH = 2000
 
-DEFAULT_ROAD_THICKNESS = 0.3 * DEFAULT_TILE_HEIGHT
+DEFAULT_ROAD_THICKNESS = 0.25 * DEFAULT_TILE_HEIGHT
 DEFAULT_FILLET_RADIUS = 0.5 * DEFAULT_ROAD_THICKNESS
 
 DEFAULT_ROAD_COLOUR = (255, 255, 255)
@@ -60,6 +60,11 @@ def generate_right_turn(rotation=0, fillet_radii=DEFAULT_FILLET_RADIUS, tile_siz
     draw.rectangle(rect1, fill=road_colour)
 
     rect2 = shapes.rotate_coords(rect1, (tile_width / 2, tile_height / 2), -90)
+    if rect2[0][0] > rect2[1][0]:
+        rect2 = [rect2[1], rect2[0]]
+    if rect2[0][1] > rect2[1][1]:
+        # swap y coords
+        rect2 = [(rect2[0][0], rect2[1][1]), (rect2[1][0], rect2[0][1])]
     draw.rectangle(rect2, fill=road_colour)
 
     # circ = shapes.get_circle_opposing_corners((tile_width / 2 + road_thickness / 2, tile_height / 2 + road_thickness / 2), road_thickness)
@@ -90,7 +95,18 @@ def generat_dead_end(rotation=0, fillet_radii=DEFAULT_FILLET_RADIUS, tile_size=(
     draw = ImageDraw.Draw(image)
     tile_width = tile_size[0]
     tile_height = tile_size[1]
-    draw.rectangle([((tile_width - road_thickness) / 2, tile_height), ((tile_width + road_thickness) / 2, (tile_height) / 2)], fill=road_colour)
+    rect = [((tile_width - road_thickness) / 2, tile_height), ((tile_width + road_thickness) / 2, (tile_height) / 2)]
+    if rect[0][0] > rect[1][0]:
+        rect = [rect[1], rect[0]]
+    if rect[0][1] > rect[1][1]:
+        # swap y coords
+        rect = [(rect[0][0], rect[1][1]), (rect[1][0], rect[0][1])]
+    # add one pixel to second coord to include corner in rectangle
+    rect[1] = (rect[1][0] + 1, rect[1][1]+1)
+    print(rect)
+    rect = shapes.symmetrically_round(rect)
+    print(rect)
+    draw.rectangle(rect, fill=road_colour)
 
     circ = shapes.get_circle_opposing_corners((tile_width / 2, tile_height / 2), road_thickness / 2)
     draw.ellipse(circ, fill=road_colour)
@@ -99,11 +115,11 @@ def generat_dead_end(rotation=0, fillet_radii=DEFAULT_FILLET_RADIUS, tile_size=(
 
 if __name__ == '__main__':
     print("Saving images...")
-    generate_straight(rotation=0).save('straight.png')
-    generate_4_way_intersection().save('cross_intersection.png')
-    generate_right_turn(rotation=0).save('right_turn.png')
-    generate_left_turn(rotation=0).save('left_turn.png')
-    generate_3_way_intersection(rotation=0).save('t_intersection.png')
-    generate_empty().save('empty.png')
-    generat_dead_end().save('dead_end.png')
+    generate_straight(rotation=0).save('sprites/straight.png')
+    generate_4_way_intersection().save('sprites/cross_intersection.png')
+    generate_right_turn(rotation=0).save('sprites/right_turn.png')
+    generate_left_turn(rotation=0).save('sprites/left_turn.png')
+    generate_3_way_intersection(rotation=0).save('sprites/t_intersection.png')
+    generate_empty().save('sprites/empty.png')
+    generat_dead_end().save('sprites/dead_end.png')
     print("Done.")

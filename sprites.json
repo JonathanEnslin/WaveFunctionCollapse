@@ -2,38 +2,82 @@
     "sprites": [
         {
             "id": "right",
-            "asset": "right-turn.png",
-            "rotations": 4
+            "asset": "right_turn.png",
+            "rotatable": true,
+            "sockets": {
+                "north": "0",
+                "east": "1",
+                "south": "1",
+                "west": "0"
+
+            }
         },
         {
             "id": "left",
-            "asset": "left-turn.png",
-            "rotations": 4
+            "asset": "left_turn.png",
+            "rotatable": true,
+            "sockets": {
+                "north": "0",
+                "east": "0",
+                "south": "1",
+                "west": "1"
+
+            }
         },
         {
             "id": "straight",
             "asset": "straight.png",
-            "rotations": 2
-        },
-        {
-            "id": "t",
-            "asset": "t-intersection.png",
-            "rotations": 4
-        },
-        {
-            "id": "cross",
-            "asset": "cross-intersection.png",
-            "rotations": 1
+            "rotatable": true,
+            "sockets": {
+                "north": "0",
+                "east": "1",
+                "south": "0",
+                "west": "1"
+            }
         },
         {
             "id": "deadend",
-            "asset": "dead-end.png",
-            "rotations": 4
+            "asset": "dead_end.png",
+            "rotatable": true,
+            "sockets": {
+                "north": "0",
+                "east": "0",
+                "south": "1",
+                "west": "0"
+            }
         },
         {
             "id": "empty",
             "asset": "empty.png",
-            "rotations": 1
+            "rotatable": false,
+            "sockets": {
+                "north": "0",
+                "east": "0",
+                "south": "0",
+                "west": "0"
+            }
+        },
+        {
+            "id": "cross",
+            "asset": "cross_intersection.png",
+            "rotatable": false,
+            "sockets": {
+                "north": "1",
+                "east": "1",
+                "south": "1",
+                "west": "1"
+            }
+        },
+        {
+            "id": "t",
+            "asset": "t_intersection.png",
+            "rotatable": true,
+            "sockets": {
+                "north": "1",
+                "east": "1",
+                "south": "1",
+                "west": "0"
+            }
         }
     ]
 }
