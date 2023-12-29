@@ -59,5 +59,5 @@ def symmetrically_round(rect):
         cnr2[1] = round(cnr2[1])
         # calculate new cnr1 y coord
         cnr1[1] = y_mid + (y_mid - cnr2[1])
-
+    rect = (tuple(cnr1), tuple(cnr2))
     return rect

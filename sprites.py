@@ -102,7 +102,7 @@ def generat_dead_end(rotation=0, fillet_radii=DEFAULT_FILLET_RADIUS, tile_size=(
         # swap y coords
         rect = [(rect[0][0], rect[1][1]), (rect[1][0], rect[0][1])]
     # add one pixel to second coord to include corner in rectangle
-    rect[1] = (rect[1][0] + 1, rect[1][1]+1)
+    rect[1] = (rect[1][0], rect[1][1])
     print(rect)
     rect = shapes.symmetrically_round(rect)
     print(rect)
@@ -115,11 +115,11 @@ def generat_dead_end(rotation=0, fillet_radii=DEFAULT_FILLET_RADIUS, tile_size=(
 
 if __name__ == '__main__':
     print("Saving images...")
-    generate_straight(rotation=0).save('sprites/straight.png')
-    generate_4_way_intersection().save('sprites/cross_intersection.png')
-    generate_right_turn(rotation=0).save('sprites/right_turn.png')
-    generate_left_turn(rotation=0).save('sprites/left_turn.png')
-    generate_3_way_intersection(rotation=0).save('sprites/t_intersection.png')
-    generate_empty().save('sprites/empty.png')
+    # generate_straight(rotation=0).save('sprites/straight.png')
+    # generate_4_way_intersection().save('sprites/cross_intersection.png')
+    # generate_right_turn(rotation=0).save('sprites/right_turn.png')
+    # generate_left_turn(rotation=0).save('sprites/left_turn.png')
+    # generate_3_way_intersection(rotation=0).save('sprites/t_intersection.png')
+    # generate_empty().save('sprites/empty.png')
     generat_dead_end().save('sprites/dead_end.png')
     print("Done.")
